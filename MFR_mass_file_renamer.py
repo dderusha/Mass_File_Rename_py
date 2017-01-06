@@ -13,10 +13,15 @@ os.chdir(directory)
 for f in os.listdir(directory):
     ''' f_name and f_ext are the front part of the file name and the extension, this splits them into two parts, nothing to change here'''
     f_name, f_ext = os.path.splitext(f)
+    if f_name == '.DS_Store':
+        continue
     ''' the following splits the file name into more pieces so we can rearrange the order, remove unwanted white space and "." that are
     icluded in the text GI. which is referenced with f_gi .  each file part is split into a tuple. "f" just is my way of saying file
      we need the underscore for no spaces and "gi" - GI, "num" - number'''
-    f_gi, f_num, f_ged, f_van, f_bla, f_float, f_en, f_azu, f_spl, = f_name.split('-')
+    try:
+        f_gi, f_num, f_ged, f_van, f_bla, f_float, f_en, f_azu, f_spl = f_name.split('-')
+    except:
+        raise Exception('Filename: %s not in proper format, expecting: Gl.-013-gedenkteken-van-blauw-float-en-Azul-split.txt' % f_name)
 
     f_gi = f_gi.strip()[:2]
     f_num = f_num.strip()
@@ -30,4 +35,4 @@ for f in os.listdir(directory):
 
     re_named = '{}-{}-{}-{}-{}-{}-{}-{}-{}{}'.format(f_ged, f_van, f_bla, f_float, f_en, f_azu, f_spl, f_gi, f_num, f_ext)
     os.rename(f, re_named)
-print("your files have been MFR!  Please check the resuts")
+print("your files have been MFR'd!  Please check the resuts")
