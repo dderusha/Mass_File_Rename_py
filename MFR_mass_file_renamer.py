@@ -30,3 +30,4 @@ for f in os.listdir(directory):
 
     re_named = '{}-{}-{}-{}-{}-{}-{}-{}-{}{}'.format(f_ged, f_van, f_bla, f_float, f_en, f_azu, f_spl, f_gi, f_num, f_ext)
     os.rename(f, re_named)
+    print("your files have been MFR!  Please check the resuts")
